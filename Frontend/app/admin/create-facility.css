@@ -1,0 +1,168 @@
+.create-facility-page {
+    padding: 1.5rem;
+    background-color: #f3f4f6;
+    min-height: 100vh;
+}
+
+.create-facility-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 48rem;
+    margin: 0 auto 1.5rem;
+}
+
+.create-facility-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.create-facility-form {
+    max-width: 48rem;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.create-facility-section {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.create-facility-section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1e293b;
+}
+
+.create-facility-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-facility-field {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.create-facility-field label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.create-facility-image-preview {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.create-facility-slot-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.65rem 0.85rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+}
+
+.slot-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.slot-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.create-facility-slot-date {
+    width: 8.5rem;
+}
+
+.slot-separator {
+    color: #94a3b8;
+    font-size: 1rem;
+    padding-bottom: 0.35rem;
+}
+
+.slot-empty-hint {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.create-facility-opening-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.create-facility-opening-day {
+    flex: 0 0 7rem;
+}
+
+.create-facility-time-picker {
+    flex: 0 0 7rem;
+    width: 7rem;
+}
+
+.create-facility-opening-row span {
+    color: #64748b;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.create-facility-fields-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.create-facility-duration-unit {
+    max-width: 7.5rem;
+}
+
+.create-facility-submit-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .create-facility-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .create-facility-fields-row {
+        grid-template-columns: 1fr;
+    }
+
+    .create-facility-opening-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .create-facility-opening-day,
+    .create-facility-opening-row .form-control[type="time"] {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}

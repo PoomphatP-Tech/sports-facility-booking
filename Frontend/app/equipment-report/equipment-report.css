@@ -1,0 +1,146 @@
+.equipment-report-page {
+  padding: 1.5rem;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+}
+
+.equipment-report-page-header {
+  margin: 0 auto 1.5rem;
+  max-width: 72rem;
+}
+
+.equipment-report-page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.equipment-report-page-header p {
+  margin-bottom: 0;
+  color: #4b5563;
+}
+
+.equipment-report-section {
+  max-width: 72rem;
+  margin: 0 auto 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+}
+
+.equipment-report-section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.equipment-report-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.equipment-report-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.equipment-report-field label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.equipment-report-input,
+.equipment-report-textarea,
+.equipment-report-select {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  outline: none;
+  background: #ffffff;
+}
+
+.equipment-report-input:focus,
+.equipment-report-textarea:focus,
+.equipment-report-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.equipment-report-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.equipment-report-submit {
+  width: fit-content;
+  border: none;
+  border-radius: 0.65rem;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.equipment-report-submit:hover {
+  background: #1d4ed8;
+}
+
+.equipment-report-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.equipment-report-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.equipment-report-card p {
+  margin-bottom: 0.6rem;
+  color: #111827;
+}
+
+.equipment-report-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.equipment-report-empty {
+  color: #64748b;
+  margin: 0;
+}
+
+.equipment-report-error {
+  color: #dc2626;
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  .equipment-report-page {
+    padding: 1rem;
+  }
+
+  .equipment-report-page-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .equipment-report-section {
+    padding: 1rem;
+  }
+
+  .equipment-report-submit {
+    width: 100%;
+  }
+}

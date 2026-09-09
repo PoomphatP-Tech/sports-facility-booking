@@ -1,0 +1,37 @@
+.admin-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.admin-header-row h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.admin-header-row p {
+    margin-bottom: 0;
+    color: #4b5563;
+}
+
+.admin-card-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-card-wrapper .card-container {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.admin-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    padding: 0.6rem 0.75rem;
+    background: #e7ecf1;
+    border-top: none;
+    border-radius: 0.5rem;
+}

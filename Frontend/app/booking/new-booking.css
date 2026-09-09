@@ -1,0 +1,58 @@
+.booking-slot-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.booking-slot-btn {
+    position: relative;
+    padding: 0.6rem 0.25rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #212529;
+    text-align: center;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.booking-slot-btn:hover:not(:disabled) {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.booking-slot-btn--selected {
+    border-color: #0d6efd;
+    border-width: 2px;
+    background: #e8f0fe;
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.booking-slot-btn--full {
+    background: #f8f9fa;
+    color: #adb5bd;
+    cursor: not-allowed;
+    border-color: #e9ecef;
+}
+
+.booking-slot-badge {
+    position: absolute;
+    top: -0.5rem;
+    right: 0.3rem;
+    background: #6c757d;
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 0.1rem 0.25rem;
+    border-radius: 0.2rem;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 576px) {
+    .booking-slot-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

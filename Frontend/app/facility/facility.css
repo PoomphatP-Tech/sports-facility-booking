@@ -1,0 +1,331 @@
+.facility-page {
+    padding: 1.5rem;
+    background-color: #f3f4f6;
+    min-height: 100vh;
+}
+
+.facility-page-header {
+    margin: 0 auto 1.5rem;
+    max-width: 72rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.facility-page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.facility-page-header p {
+    margin-bottom: 0;
+    color: #4b5563;
+}
+
+.facility-toolbar {
+    max-width: 72rem;
+    margin: 0 auto 1.5rem;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.facility-search {
+    flex: 1;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 1rem;
+    outline: none;
+}
+
+.facility-search:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.facility-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+}
+
+.facility-filter-row .facility-search {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.facility-filter-row .form-select {
+    flex: 0 0 13rem;
+    min-width: 12rem;
+    max-height: 40px;
+}
+
+.facility-filter-row .btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.facility-advanced-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    align-items: end;
+}
+
+.facility-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.facility-filter-field label {
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.facility-filter-field select {
+    border: 1px solid #cbd5e1;
+    border-radius: 0.55rem;
+    padding: 0.55rem 0.65rem;
+    color: #334155;
+    background: #ffffff;
+    outline: none;
+}
+
+.facility-filter-field select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.facility-list-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+.card-container {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.facility-card-image {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+}
+
+.facility-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+}
+
+.facility-card-title {
+    margin-bottom: 0.25rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.facility-card-description {
+    margin-bottom: 0.5rem;
+    color: #334155;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.facility-card-meta {
+    margin-top: 0.15rem;
+}
+
+.facility-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #334155;
+    font-weight: 500;
+}
+
+.facility-meta-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: #16a34a;
+    display: inline-block;
+}
+
+.facility-meta-icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 0.72rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.facility-meta-value {
+    margin-left: 0.95rem;
+    margin-top: 0.2rem;
+    color: #111827;
+}
+
+.facility-slot-list {
+    margin-left: 0.95rem;
+    margin-top: 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.facility-slot-chip {
+    font-size: 0.8rem;
+    background: #eff6ff;
+    color: black;
+    border-radius: 4px;
+    padding: 0.2rem 0.55rem;
+    line-height: 1.2;
+}
+
+.facility-opening-more-btn {
+    margin-left: 0.95rem;
+    margin-top: 0.35rem;
+    border: 0;
+    background: transparent;
+    color: #2563eb;
+    font-size: 0.82rem;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.facility-inline-more-btn {
+    margin-left: 0.35rem;
+    border: 0;
+    background: transparent;
+    color: #2563eb;
+    font-size: 0.82rem;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.facility-modal-slot-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.facility-guideline-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #334155;
+}
+
+.facility-guideline-list li {
+    margin-bottom: 0.25rem;
+}
+
+.facility-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.facility-card-actions .btn {
+    flex: 1 1 9.5rem;
+}
+
+.facility-empty-state {
+    max-width: 72rem;
+    margin: 1rem auto 0;
+    color: #64748b;
+}
+
+@media (max-width: 576px) {
+    .facility-page {
+        padding: 1rem;
+    }
+
+    .facility-page-header h1 {
+        font-size: 1.45rem;
+    }
+
+    .facility-toolbar {
+        padding: 0.75rem;
+    }
+
+    .facility-search {
+        width: 100%;
+    }
+
+    .facility-filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    .facility-filter-row .form-select {
+        min-width: 0;
+        width: 100%;
+        max-height: 40px;
+    }
+
+    .facility-filter-row .btn {
+        width: 100%;
+    }
+
+    .facility-advanced-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .facility-list-container {
+        grid-template-columns: 1fr;
+    }
+
+    .card-container {
+        width: 100%;
+    }
+
+    .facility-card-image {
+        height: 12rem;
+    }
+
+    .facility-card-actions .btn {
+        width: 100%;
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .facility-advanced-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .facility-list-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+    .facility-filter-row .form-select {
+        flex-basis: 11rem;
+        min-width: 10rem;
+        max-height: 40px;
+    }
+}

@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+*.env
+Backend/.env
+Frontend/.env
+.idea/
+
+# Dependencies
+node_modules/
+Backend/node_modules/
+Frontend/node_modules/
+
+# Build artifacts
+build/
+Frontend/build/
+Frontend/.react-router/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Firebase keys
+Backend/src/config/firebaseKey.json

@@ -1,0 +1,188 @@
+/* ── Shared page layout ── */
+.staff-page {
+    padding: 1.5rem;
+    background-color: #f3f4f6;
+    min-height: 100vh;
+}
+
+/* ── Staff list header ── */
+.staff-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 72rem;
+    margin: 0 auto 1.5rem;
+}
+
+.staff-page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.staff-page-header p {
+    margin-bottom: 0;
+    color: #4b5563;
+}
+
+/* ── Table wrapper ── */
+.staff-table-wrapper {
+    max-width: 72rem;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.staff-table {
+    margin-bottom: 0;
+}
+
+.staff-table thead th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.staff-table tbody td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.staff-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.staff-table tbody tr:hover td {
+    background: #f8fafc;
+}
+
+.staff-cell-index {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    width: 2.5rem;
+}
+
+.staff-cell-username {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #3b82f6;
+}
+
+.staff-status-badge {
+    font-size: 0.75rem;
+    padding: 0.3em 0.65em;
+    border-radius: 9999px;
+}
+
+.staff-action-buttons {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.staff-empty-row {
+    text-align: center;
+    color: #94a3b8;
+    padding: 3rem 1rem;
+}
+
+/* ── Create / Edit staff ── */
+.create-staff-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 48rem;
+    margin: 0 auto 1.5rem;
+}
+
+.create-staff-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.create-staff-form {
+    max-width: 48rem;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.create-staff-section {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.create-staff-section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1e293b;
+}
+
+.create-staff-field {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.create-staff-field label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.create-staff-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-staff-facility-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.create-staff-facility-row .form-select {
+    flex: 1;
+}
+
+.create-staff-submit-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-bottom: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .staff-page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .staff-action-buttons {
+        flex-direction: column;
+    }
+
+    .create-staff-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}

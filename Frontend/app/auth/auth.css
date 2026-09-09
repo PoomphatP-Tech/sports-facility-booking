@@ -1,0 +1,350 @@
+.auth-container {
+  min-height: 100vh;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px rgba(15, 23, 42, 0.2);
+  background: white;
+  width: 100%;
+  height: 600px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: #ffffff;
+  padding: 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+}
+
+.auth-form .form-control {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .auth-panel {
+    flex-direction: row;
+    max-width: 76rem;
+  }
+}
+
+.auth-side {
+  background: linear-gradient(180deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .auth-side {
+    width: 50%;
+  }
+}
+
+.auth-side h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.auth-side > div p {
+  font-size: 1rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.auth-side > p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.auth-form-wrap {
+  padding: 1.5rem;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .auth-form-wrap {
+    width: 50%;
+  }
+}
+
+.auth-form-wrap h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.auth-form-wrap > p {
+  margin: 0 0 1rem 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.auth-footer a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.react-datepicker {
+  border: 1px solid #dae6f6;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+}
+
+.react-datepicker__header {
+  background-color: #1e40af !important;
+  color: #ffffff !important;
+}
+
+.react-datepicker__current-month {
+  display: none;
+}
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+  display: none;
+}
+
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.react-datepicker__month-text,
+.react-datepicker__year-text {
+  color: #1f2937;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  color: #ffffff;
+}
+
+.calendar-header-selectors {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.calendar-nav-btn {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.calendar-nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.calendar-nav-btn:disabled {
+  opacity: 0.45;
+}
+
+.calendar-selector .btn {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+  border-radius: 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  min-width: 7.2rem;
+  padding: 0.28rem 0.7rem;
+}
+
+.calendar-selector-year .btn {
+  min-width: 5.4rem;
+}
+
+.calendar-selector .btn:hover,
+.calendar-selector .btn:focus,
+.calendar-selector.show .btn {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1e40af;
+  box-shadow: 0 0 0 0.15rem rgba(147, 197, 253, 0.35);
+}
+
+.calendar-selector .dropdown-menu {
+  border: 1px solid #dbeafe;
+  border-radius: 0.6rem;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+  max-height: 14rem;
+  overflow-y: auto;
+  padding: 0.35rem;
+}
+
+.calendar-selector .dropdown-item {
+  border-radius: 0.4rem;
+  color: #1e293b;
+  font-size: 0.86rem;
+  padding: 0.38rem 0.55rem;
+}
+
+.calendar-selector .dropdown-item:hover,
+.calendar-selector .dropdown-item:focus {
+  background: #e0ecff;
+  color: #1d4ed8;
+}
+
+.calendar-selector .dropdown-item.active,
+.calendar-selector .dropdown-item:active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.auth-dob-input {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .calendar-header {
+    padding: 0.45rem;
+    gap: 0.35rem;
+  }
+
+  .calendar-header-selectors {
+    gap: 0.35rem;
+  }
+
+  .calendar-selector .btn {
+    min-width: 5.7rem;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .calendar-selector-year .btn {
+    min-width: 4.6rem;
+  }
+}
+
+
+.react-datepicker__month-text--selected,
+.react-datepicker__year-text--selected {
+  color: #bfdbfe;
+  background: #e0f2fe;
+  border-radius: 0.35rem;
+}
+
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  background: #93c5fd;
+  color: #1e3a8a;
+  border-radius: 0.35rem;
+}
+
+.react-datepicker__day {
+  border-radius: 0.5rem;
+  transition: background-color .15s ease, color .15s ease;
+  color: #0f172a;
+}
+
+.react-datepicker__day:hover {
+  background-color: #e5e7eb;
+  color: #1d4ed8;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #93c5fd;
+  color: #1e3a8a;
+  border-radius: 0.5rem;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #93c5fd;
+  color: #1e3a8a;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+.react-datepicker__day--today {
+  font-weight: 700;
+  background: #dbeafe;
+  color: #1d4ed8;
+  border: 1px solid #93c5fd;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #2563eb;
+  color: #ffffff;
+  border-radius: 0.5rem;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker-popper {
+  z-index: 9999;
+}
+
+.react-datepicker__year-dropdown,
+.react-datepicker__month-dropdown {
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+  color: #adb5bd;
+  font-size: 0.85rem;
+}
+.auth-divider {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #dee2e6;
+}
+.auth-divider span {
+  padding: 0 0.75rem;
+}

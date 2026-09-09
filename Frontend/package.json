@@ -1,0 +1,40 @@
+{
+  "name": "my-react-router-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "serve -s build/client -l 3000",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@react-router/node": "7.13.1",
+    "@react-router/serve": "7.13.1",
+    "@types/leaflet": "^1.9.21",
+    "axios": "^1.14.0",
+    "bootstrap": "^5.3.8",
+    "firebase": "^12.12.1",
+    "isbot": "^5.1.36",
+    "leaflet": "^1.9.4",
+    "react": "^19.2.4",
+    "react-bootstrap": "^2.10.10",
+    "react-datepicker": "^9.1.0",
+    "react-dom": "^19.2.4",
+    "react-leaflet": "^5.0.0",
+    "react-router": "7.13.1",
+    "react-time-picker": "^8.0.3",
+    "serve": "^14.2.6"
+  },
+  "devDependencies": {
+    "@react-router/dev": "7.13.1",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^22",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

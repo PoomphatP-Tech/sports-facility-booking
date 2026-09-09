@@ -1,0 +1,252 @@
+.partner-matching-page {
+  padding: 1.5rem;
+  background-color: #f3f4f6;
+  min-height: 100vh;
+}
+
+.partner-matching-page-header {
+  margin: 0 auto 1.5rem;
+  max-width: 72rem;
+}
+
+.partner-matching-page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.partner-matching-page-header p {
+  margin-bottom: 0;
+  color: #4b5563;
+}
+
+.partner-matching-toolbar {
+  max-width: 72rem;
+  margin: 0 auto 1.5rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.partner-matching-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+.partner-matching-search,
+.partner-matching-select {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  outline: none;
+  background: #ffffff;
+}
+
+.partner-matching-search {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.partner-matching-select {
+  flex: 0 0 13rem;
+  min-width: 12rem;
+}
+
+.partner-matching-search:focus,
+.partner-matching-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.partner-matching-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.partner-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.partner-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.partner-card p {
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.partner-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.partner-card-tag {
+  font-size: 0.8rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  line-height: 1.2;
+}
+
+.partner-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.partner-primary-btn,
+.partner-secondary-btn {
+  border-radius: 0.65rem;
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.partner-primary-btn {
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.partner-primary-btn:hover {
+  background: #1d4ed8;
+}
+
+.partner-secondary-btn {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #111827;
+}
+
+.partner-secondary-btn:hover {
+  background: #f8fafc;
+}
+
+.partner-empty-state {
+  max-width: 72rem;
+  margin: 1rem auto 0;
+  color: #64748b;
+}
+
+.partner-request-section {
+  max-width: 72rem;
+  margin: 0 auto 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+}
+
+.partner-request-section h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.partner-request-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.partner-request-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  padding: 1rem;
+}
+
+.partner-request-card p {
+  margin-bottom: 0.55rem;
+}
+
+.partner-request-status {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.partner-request-status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.partner-request-status.accepted {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.partner-request-status.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.partner-profile-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #374151;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 576px) {
+  .partner-matching-page {
+    padding: 1rem;
+  }
+
+  .partner-matching-page-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .partner-matching-toolbar {
+    padding: 0.75rem;
+  }
+
+  .partner-matching-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .partner-matching-select,
+  .partner-matching-search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .partner-matching-list {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-card-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .partner-matching-list {
+    grid-template-columns: 1fr;
+  }
+}
