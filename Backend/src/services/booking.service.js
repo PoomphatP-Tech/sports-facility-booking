@@ -391,7 +391,6 @@ const checkBookingConflict = async (bookingRequestId, staffId) => {
     );
     const occupied = parseInt(occupancyResult.rows[0].occupied_count, 10);
     if (occupied >= detail.max_people) {
-        console.log("max_people:", detail.max_people, "occupied:", occupied);
         errors.push('CAPACITY_EXCEEDED');
     }
 

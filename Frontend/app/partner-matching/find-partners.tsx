@@ -18,7 +18,6 @@ export default function FindPartners() {
     try {
       setLoading(true);
       const response = await partnerMatchingService.getPartners();
-      console.log("[DEBUG] partners response:", JSON.stringify(response.data?.[0]));
       setPartners(response.data);
     } catch (error) {
       console.error(error);

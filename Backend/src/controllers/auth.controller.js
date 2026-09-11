@@ -39,7 +39,7 @@ const completeRegisterDetails = async (req, res) => {
 };
 
 const me = async (req, res) => {
-  return res.status(200).json({ user: req.user });
+  return res.status(200).json({ user: req.user, nextStep: authService.getNextStep(req.user) });
 };
 
 const sessionStatus = async (req, res) => {
@@ -54,14 +54,21 @@ const sessionStatus = async (req, res) => {
   });
 };
 
-const googleSync = async (req, res) => {
+const googleSync = async (req, res, next) => {
   try {
-    const { firebaseUid, email, firstName, lastName } = req.body;
-    const result = await authService.googleSync({ firebaseUid, email, firstName, lastName });
-    return res.status(200).json(result);
+    const { uid, email, name } = req.googleIdentity;
+    const [firstName = '', ...lastName] = (name || '').trim().split(/\s+/);
+    await authService.googleSync({
+      firebaseUid: uid, email, firstName, lastName: lastName.join(' '),
+    });
   } catch (error) {
-    return res.status(error.statusCode || 400).json(formatErrorResponse(error, 'Google sync failed'));
+    if (error.statusCode) {
+      return res.status(error.statusCode).json(formatErrorResponse(error, 'Google sync failed'));
+    }
+    console.error('Google account sync failed:', error.code);
+    return res.status(503).json({ message: 'Unable to finish Google sign-in. Please try again.' });
   }
+  return next();
 };
 
 module.exports = {
