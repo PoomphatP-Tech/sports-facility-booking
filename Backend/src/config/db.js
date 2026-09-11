@@ -2,10 +2,13 @@ const pg = require('pg');
 pg.types.setTypeParser(1082, (val) => val);
 
 const { Pool } = require('pg');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const sslConfig =
   process.env.DB_SSL === 'true'
     ? {
+      ca: fs.readFileSync(path.join(__dirname, 'supabase-ca.crt'), 'utf8'),
       rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED !== 'false',
     }
     : false;
