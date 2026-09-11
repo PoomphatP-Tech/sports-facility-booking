@@ -56,6 +56,7 @@ export interface CompleteRegisterResponse {
 
 export interface MeResponse {
   user: User;
+  nextStep: "details" | null;
 }
 
 export interface SessionStatusResponse {

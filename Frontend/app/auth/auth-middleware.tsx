@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged, type User as FirebaseUser } from "firebase/auth";
 import { firebaseAuth } from "~/config/firebase";
-import { api } from "~/services/http";
+import { loadAuthSession } from "~/services/auth-session.service";
 import type { User } from "~/services/types";
 
 const AuthContext = createContext<{
@@ -15,10 +15,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+    let authVersion = 0;
     const unsubscribe = onAuthStateChanged(
       firebaseAuth,
       async (firebaseUser: FirebaseUser | null) => {
-        setLoading(true);
+        const version = ++authVersion;
+        const isCurrent = () => active && version === authVersion;
+        setUser(null);
         if (!firebaseUser) {
           setUser(null);
           setLoading(false);
@@ -26,25 +30,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         try {
-          await firebaseUser.getIdToken(true);
-
-          const { data } = await api.get<{ user: User }>("/auth/me");
-
-          if (data.user.role === "member" && !firebaseUser.emailVerified) {
-            setUser(null);
-            return;
-          }
+          const data = await loadAuthSession(firebaseUser);
+          if (!isCurrent()) return;
 
           setUser(data.user);
         } catch {
-          setUser(null);
+          if (isCurrent()) setUser(null);
         } finally {
-          setLoading(false);
+          if (isCurrent()) setLoading(false);
         }
       },
     );
 
-    return () => unsubscribe();
+    return () => {
+      active = false;
+      unsubscribe();
+    };
   }, []);
 
   return (

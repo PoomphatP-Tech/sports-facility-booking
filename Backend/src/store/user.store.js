@@ -123,6 +123,54 @@ const createMember = async (userId) => {
   return rows[0] ?? null;
 };
 
+const findOrCreateGoogleUser = async ({ firebaseUid, email, firstName, lastName }) => {
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    let { rows } = await client.query(
+      `SELECT ${USER_SELECT} FROM public.users WHERE firebase_uid = $1 LIMIT 1`,
+      [firebaseUid],
+    );
+
+    if (!rows.length) {
+      ({ rows } = await client.query(
+        `INSERT INTO public.users (firebase_uid, email, first_name, last_name, role)
+         VALUES ($1, $2, $3, $4, 'member')
+         ON CONFLICT DO NOTHING RETURNING ${USER_SELECT}`,
+        [firebaseUid, email.trim().toLowerCase(), firstName || null, lastName || null],
+      ));
+    }
+
+    // Another request may have created the same UID while this one was waiting.
+    if (!rows.length) {
+      ({ rows } = await client.query(
+        `SELECT ${USER_SELECT} FROM public.users WHERE firebase_uid = $1 LIMIT 1`,
+        [firebaseUid],
+      ));
+    }
+    if (!rows.length) {
+      const error = new Error('An account with this email already exists. Please sign in using your original method.');
+      error.statusCode = 409;
+      throw error;
+    }
+
+    const user = mapUser(rows[0]);
+    if (user.role === 'member') {
+      await client.query(
+        'INSERT INTO public.members (user_id) VALUES ($1) ON CONFLICT (user_id) DO NOTHING',
+        [user.id],
+      );
+    }
+    await client.query('COMMIT');
+    return user;
+  } catch (error) {
+    await client.query('ROLLBACK');
+    throw error;
+  } finally {
+    client.release();
+  }
+};
+
 const reset = async () => {
   await pool.query(
     'TRUNCATE TABLE public.users RESTART IDENTITY CASCADE',
@@ -132,6 +180,7 @@ const reset = async () => {
 module.exports = {
   create,
   createMember,
+  findOrCreateGoogleUser,
   findByEmail,
   findByFirebaseUid,
   findById,

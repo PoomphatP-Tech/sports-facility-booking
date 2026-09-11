@@ -1,6 +1,14 @@
 const { auth } = require("../config/firebase");
 const userStore = require("../store/user.store");
 
+// Only the four seeded demo identities may skip email verification.
+const DEMO_UIDS = new Set([
+  "klBrxNF0BfWgpvWevN9WIB2jyn12", // Member
+  "0habl4qJKvWHNlG5WyHatHRa3KJ3", // Member 2
+  "RPhjcBa4NFXhYiBlc9HtxejtoMx1", // Staff
+  "0IFvF9Exe5ht4BtwQSXulu6NwF02", // Admin
+]);
+
 const requireAuth = async (req, res, next) => {
   const authHeader = req.headers.authorization || "";
   const [scheme, token] = authHeader.split(" ");
@@ -20,7 +28,7 @@ const requireAuth = async (req, res, next) => {
       return res.status(403).json({ message: "account is suspended" });
     }
 
-    if (user.role === "member" && !decoded.email_verified) {
+    if (decoded.email_verified !== true && !DEMO_UIDS.has(decoded.uid)) {
       return res.status(403).json({ message: "email is not verified" });
     }
 
@@ -37,7 +45,8 @@ const requireAuth = async (req, res, next) => {
     };
 
     return next();
-  } catch {
+  } catch (error) {
+    console.error("Authentication error:", error.code, error.message);
     return res.status(401).json({ message: "token is invalid or expired" });
   }
 };

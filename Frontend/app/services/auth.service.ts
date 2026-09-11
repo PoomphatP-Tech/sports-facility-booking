@@ -9,8 +9,8 @@ import {
 } from "firebase/auth";
 import { firebaseAuth, googleProvider } from "../config/firebase";
 import { api } from "./http";
+import { loadAuthSession } from "./auth-session.service";
 import type {
-  User,
   CompleteRegisterRequest,
   CompleteRegisterResponse,
   RegisterCredentialsRequest,
@@ -42,32 +42,15 @@ export const authService = {
     return data;
   },
 
-  login: async (email: string, password: string): Promise<{ user: User }> => {
-    await signInWithEmailAndPassword(firebaseAuth, email, password);
+  login: async (email: string, password: string): Promise<MeResponse> => {
+    const credential = await signInWithEmailAndPassword(firebaseAuth, email, password);
 
-    try {
-      const { data } = await api.get<{ user: User }>("/auth/me");
-      return data;
-    } catch (err: unknown) {
-      const msg = (err as { message?: string }).message;
-      if (msg === "email is not verified") {
-        const e = new Error("Email not verified") as Error & { code: string };
-        e.code = "email-not-verified";
-        throw e;
-      }
-      throw err;
-    }
+    return loadAuthSession(credential.user);
   },
 
-  loginWithGoogle: async (): Promise<{ user: User; nextStep: string | null }> => {
+  loginWithGoogle: async (): Promise<MeResponse> => {
     const credential = await signInWithPopup(firebaseAuth, googleProvider);
-    const { uid, email, displayName } = credential.user;
-    const [firstName, ...rest] = (displayName ?? "").split(" ");
-    const { data } = await api.post<{ user: User; nextStep: string | null }>(
-      "/auth/google-sync",
-      { firebaseUid: uid, email, firstName: firstName || "", lastName: rest.join(" ") || "" }
-    );
-    return data;
+    return loadAuthSession(credential.user);
   },
 
   logout: async (): Promise<void> => {
@@ -86,10 +69,6 @@ export const authService = {
       }
 
       await firebaseAuth.currentUser.reload();
-
-      if (!firebaseAuth.currentUser.emailVerified) {
-        return { isLoggedIn: false, isPendingStep3: false, user: null };
-      }
 
       const { data } = await api.get<SessionStatusResponse>("/auth/session");
       return data;

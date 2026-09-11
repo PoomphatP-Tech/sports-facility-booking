@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const apiRoutes = require('./src/routes');
-const { initDb } = require('./src/config/db');
+const { pool, initDb } = require('./src/config/db');
 const { seedRootAdmin } = require('./src/services/admin.service');
 
 const app = express();
@@ -44,8 +44,15 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-app.get('/api/ping', (req, res) => {
-  res.set('Cache-Control', 'no-store').json({ serverready: true });
+app.get('/api/ping', async (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  try {
+    await pool.query('SELECT NOW() AS server_time');
+    res.json({ serverready: true });
+  } catch (error) {
+    console.error('[ping] Database error:', error.code, error.message);
+    res.status(503).json({ serverready: false });
+  }
 });
 
 app.get('/init-db', async (req, res) => {

@@ -1,15 +1,24 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "./auth-middleware";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import "./auth.css";
 import { authService } from "~/services/auth.service";
+import { getSessionDestination } from "~/services/auth-session.service";
 import {
   APP_BRAND_NAME,
   APP_BRAND_SUBTITLE,
   APP_BRAND_TAGLINE,
 } from "~/constants/app.constants";
 import googleIcon from "~/image/google.png";
+
+const DEMO_ACCOUNTS = [
+  { label: "Member", email: "demo.member@example.com" },
+  { label: "Member 2", email: "demo.member2@example.com" },
+  { label: "Staff", email: "demo.staff@example.com" },
+  { label: "Admin", email: "demo.admin@example.com" },
+];
+const DEMO_PASSWORD = "PlayCourt!27";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,48 +27,74 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [activeDemo, setActiveDemo] = useState<string | null>(null);
+  const [demoError, setDemoError] = useState("");
+  const submittingRef = useRef(false);
 
   const handleGoogleLogin = async () => {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setErrorMessage("");
+    setDemoError("");
     setIsSubmitting(true);
     try {
-      const { user, nextStep } = await authService.loginWithGoogle();
-      if (nextStep === "details") {
-        navigate("/auth/register?step=3");
-      } else {
-        setUser(user);
-        navigate(user.role === "admin" ? "/admin" : "/");
-      }
+      const session = await authService.loginWithGoogle();
+      setUser(session.user);
+      navigate(getSessionDestination(session), { replace: true });
     } catch (error) {
-      const apiError = error as ApiError;
-      setErrorMessage(apiError.message || "Google login failed");
+      const authError = error as { code?: string; message?: string };
+      if (authError.code === "auth/popup-closed-by-user" ||
+          authError.code === "auth/cancelled-popup-request") return;
+      if (authError.code === "auth/popup-blocked") {
+        setErrorMessage("Allow popups for this site, then try Google sign-in again.");
+      } else if (authError.code === "auth/account-exists-with-different-credential") {
+        setErrorMessage("An account with this email already exists. Please sign in using your original method.");
+      } else if (authError.code === "auth/invalid-credential") {
+        setErrorMessage("Google sign-in could not be verified. Please try again.");
+      } else {
+        setErrorMessage(authError.message || "Google login failed. Please try again.");
+      }
     } finally {
+      submittingRef.current = false;
       setIsSubmitting(false);
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const loginWithPassword = async (loginEmail: string, loginPassword: string, demoLabel: string | null = null) => {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setErrorMessage("");
-
+    setDemoError("");
+    setActiveDemo(demoLabel);
     setIsSubmitting(true);
     try {
-      const { user } = await authService.login(email, password);
-      setUser(user);
-      navigate("/");
+      const session = await authService.login(loginEmail, loginPassword);
+      setUser(session.user);
+      navigate(getSessionDestination(session), { replace: true });
     } catch (error) {
       const anyError = error as { code?: string; message?: string };
-
-      if (anyError.code === "email-not-verified") {
-        navigate("/auth/register?verify=true");
-      } else if (anyError.code?.startsWith("auth/")) {
-        setErrorMessage("Email or password is incorrect");
-      } else {
-        setErrorMessage(anyError.message || "Login failed");
+      if (anyError.message === "email is not verified") {
+        navigate("/auth/register?step=2", { replace: true });
+        return;
       }
+
+      const message = anyError.code?.startsWith("auth/")
+        ? demoLabel
+          ? "This demo account is unavailable. Please try again later."
+          : "Email or password is incorrect. Please try again."
+        : anyError.message || "Login failed. Please try again.";
+      if (demoLabel) setDemoError(message);
+      else setErrorMessage(message);
     } finally {
+      submittingRef.current = false;
       setIsSubmitting(false);
+      setActiveDemo(null);
     }
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    void loginWithPassword(email, password);
   };
 
   return (
@@ -71,6 +106,34 @@ export default function Login() {
             <p>{APP_BRAND_SUBTITLE}</p>
           </div>
           <p>{APP_BRAND_TAGLINE}</p>
+          <section className="auth-demo" aria-labelledby="guest-accounts-heading">
+            <h2 id="guest-accounts-heading">Try the demo</h2>
+            <p className="auth-demo-intro">Choose an account to log in instantly.</p>
+            <div className="auth-demo-accounts">
+              {DEMO_ACCOUNTS.map((account) => (
+                <button
+                  className="auth-demo-button"
+                  key={account.email}
+                  type="button"
+                  disabled={isSubmitting}
+                  aria-label={`Log in as ${account.label}`}
+                  aria-busy={activeDemo === account.label}
+                  onClick={() => void loginWithPassword(account.email, DEMO_PASSWORD, account.label)}
+                >
+                  <span className="auth-demo-button-title">{account.label}</span>
+                  <span className="auth-demo-button-action">
+                    {activeDemo === account.label ? (
+                      <Spinner animation="border" size="sm" aria-hidden="true" />
+                    ) : (
+                      <span aria-hidden="true">→</span>
+                    )}
+                  </span>
+                </button>
+              ))}
+            </div>
+            {activeDemo && <span className="visually-hidden" role="status">Signing in as {activeDemo}...</span>}
+            {demoError && <p className="auth-demo-error" role="alert">{demoError}</p>}
+          </section>
         </div>
 
         <div className="auth-form-wrap">
@@ -118,7 +181,7 @@ export default function Login() {
                 className="w-100 mb-3"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? (
+                {isSubmitting && !activeDemo ? (
                   <Spinner animation="border" size="sm" />
                 ) : (
                   "Log In"
