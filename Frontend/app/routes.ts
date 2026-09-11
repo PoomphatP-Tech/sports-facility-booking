@@ -1,6 +1,7 @@
 import { type RouteConfig, route, layout } from "@react-router/dev/routes";
 
 export default [
+  route("cold-start", "routes/cold-start.tsx"),
   layout("routes/member-layout.tsx", [
     route("", "facility/facility-list.tsx"),
     route("facilities/map", "facility/facilities-map.tsx"),
