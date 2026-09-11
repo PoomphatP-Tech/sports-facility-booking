@@ -44,6 +44,10 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
+app.get('/api/ping', (req, res) => {
+  res.set('Cache-Control', 'no-store').json({ serverready: true });
+});
+
 app.get('/init-db', async (req, res) => {
   try {
     await initDb();

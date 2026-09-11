@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   isRouteErrorResponse,
   Links,
@@ -13,6 +14,7 @@ import "./app.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AppNavbar from "./navigation/app-navbar";
 import { AuthProvider } from "./auth/auth-middleware";
+import ColdStart from "./routes/cold-start";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -47,6 +49,42 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const location = useLocation();
+  const [serverReady, setServerReady] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function checkServer() {
+      try {
+        const expiresAt = Number(localStorage.getItem("serverreadyExpiresAt"));
+        if (localStorage.getItem("serverready") === "true" && Date.now() < expiresAt) {
+          setServerReady(true);
+          return;
+        }
+
+        localStorage.setItem("serverready", "false");
+        const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:5000/api";
+        const response = await fetch(`${apiUrl.replace(/\/+$/, "")}/ping`, {
+          signal: controller.signal,
+          cache: "no-store",
+        });
+        const data = response.ok ? await response.json() : null;
+        if (data?.serverready === true && !controller.signal.aborted) {
+          localStorage.setItem("serverreadyExpiresAt", String(Date.now() + 60 * 60 * 1000));
+          localStorage.setItem("serverready", "true");
+          setServerReady(true);
+        }
+      } catch {
+        // Keep showing the landing page if the check fails.
+      }
+    }
+
+    void checkServer();
+    return () => controller.abort();
+  }, []);
+
+  if (!serverReady) return <ColdStart />;
+  if (location.pathname === "/cold-start") return <Outlet />;
   const shouldShowNavbar = !location.pathname.startsWith("/auth");
 
   return (
